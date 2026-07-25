@@ -12,6 +12,14 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
+    - name: Cache ShellCheck
+      uses: actions/cache@v4
+      with:
+        path: ~/.cache/shellcheck
+        key: ${{ runner.os }}-shellcheck-${{ hashFiles('**/*.sh') }}
+        restore-keys: |
+          ${{ runner.os }}-shellcheck-
+
     - name: Run ShellCheck
       uses: ludeeus/action-shellcheck@master
       with:
